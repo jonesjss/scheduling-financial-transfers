@@ -1,0 +1,6 @@
+CREATE TABLE users (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+   name VARCHAR(255) NOT NULL,
+   creation_date TIMESTAMP NOT NULL,
+   CONSTRAINT pk_users PRIMARY KEY (id)
+);

@@ -1,0 +1,9 @@
+CREATE TABLE accounts (
+  id BIGINT AUTO_INCREMENT NOT NULL,
+   agency VARCHAR(255) NOT NULL,
+   account_number VARCHAR(255) NOT NULL,
+   user_id BIGINT NOT NULL,
+   CONSTRAINT pk_accounts PRIMARY KEY (id)
+);
+
+ALTER TABLE accounts ADD CONSTRAINT FK_ACCOUNTS_ON_USER FOREIGN KEY (user_id) REFERENCES users (id);
