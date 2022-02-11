@@ -9,19 +9,18 @@ import com.cvc.financial.domain.repository.TransferRepository;
 import com.cvc.financial.util.AccountFactory;
 import com.cvc.financial.util.CommonUtils;
 import com.cvc.financial.util.TransferFactory;
-import com.cvc.financial.util.UserFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.BDDMockito;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 
 @DisplayName("Tests for TransferService")
 @ExtendWith(SpringExtension.class)
