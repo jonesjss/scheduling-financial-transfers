@@ -29,7 +29,7 @@ class UserServiceTest {
     @DisplayName("findById return user when successful")
     void findById_ReturnUser_WhenSuccessful() {
         BDDMockito.when(userRepository.findById(ArgumentMatchers.anyLong()))
-                .thenReturn(Optional.of(UserFactory.createUserToBeSaved()));
+                .thenReturn(Optional.of(UserFactory.createUserOrigemToBeSaved()));
 
         var user = userService.findById(1L);
 
@@ -51,7 +51,7 @@ class UserServiceTest {
     @Test
     @DisplayName("findById throw not found exception when user not found")
     void save_ReturnUser_WhenUserIsSaved() {
-        var user = UserFactory.createUserToBeSaved();
+        var user = UserFactory.createUserOrigemToBeSaved();
         BDDMockito.when(userRepository.save(user))
                 .thenReturn(user);
 

@@ -6,7 +6,11 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class UserFactory {
 
-    public static User createUserToBeSaved() {
-        return new User("TEST");
+    public static User createUserOrigemToBeSaved() {
+        return new User("ORIGINATING");
+    }
+
+    public static User createUserDestinationToBeSaved() {
+        return new User("DESTINATION");
     }
 }

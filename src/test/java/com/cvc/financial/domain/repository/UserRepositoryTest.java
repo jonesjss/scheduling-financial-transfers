@@ -30,21 +30,21 @@ class UserRepositoryTest {
     @Test
     @DisplayName("save return user when successful")
     void save_ReturnsUser_WhenSuccessful() {
-        var user = UserFactory.createUserToBeSaved();
+        var user = UserFactory.createUserOrigemToBeSaved();
 
         var userSaved = userRepository.save(user);
 
         Assertions.assertThat(userSaved).isNotNull();
         Assertions.assertThat(userSaved.getId()).isPositive();
-        Assertions.assertThat(userSaved.getName()).isEqualTo("TEST");
-        Assertions.assertThat(userSaved.getCreationDate()).isNotNull();
+        Assertions.assertThat(userSaved.getName()).isEqualTo(user.getName());
+        Assertions.assertThat(userSaved.getCreation()).isNotNull();
     }
 
     @Test
     @DisplayName("save return user with account when successful")
     void save_ReturnsUserWithAccount_WhenSuccessful() {
-        var user = UserFactory.createUserToBeSaved();
-        var account = AccountFactory.createAccountToBeSaved(user);
+        var user = UserFactory.createUserOrigemToBeSaved();
+        var account = AccountFactory.createAccountOriginatingToBeSaved(user);
         user.addAccount(account);
 
         var userSaved = userRepository.save(user);
@@ -56,8 +56,8 @@ class UserRepositoryTest {
     @Test
     @DisplayName("delete user with account when successful")
     void delete_UserWithAccount_WhenSuccessful() {
-        var user = UserFactory.createUserToBeSaved();
-        var account = AccountFactory.createAccountToBeSaved(user);
+        var user = UserFactory.createUserOrigemToBeSaved();
+        var account = AccountFactory.createAccountOriginatingToBeSaved(user);
         user.addAccount(account);
 
         var userSaved = userRepository.save(user);
@@ -67,7 +67,7 @@ class UserRepositoryTest {
         userRepository.flush();
 
         Optional<User> userNull = userRepository.findById(userSaved.getId());
-        Set<Account> accounts = accountRepository.findByUser(user);
+        Set<Account> accounts = accountRepository.findByUserId(user.getId());
 
         Assertions.assertThat(userNull).isEmpty();
         Assertions.assertThat(accounts).isEmpty();

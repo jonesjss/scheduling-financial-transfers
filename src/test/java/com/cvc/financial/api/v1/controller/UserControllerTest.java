@@ -10,12 +10,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.mockito.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 class UserControllerTest {
@@ -31,7 +28,7 @@ class UserControllerTest {
     @DisplayName("findById return user when successful")
     void findById_ReturnUser_WhenSuccessful() {
         BDDMockito.when(userService.findById(ArgumentMatchers.anyLong()))
-                .thenReturn(UserFactory.createUserToBeSaved());
+                .thenReturn(UserFactory.createUserOrigemToBeSaved());
 
         UserOutput userOutput = userController.findById(1L);
 
