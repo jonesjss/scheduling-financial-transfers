@@ -1,6 +1,14 @@
 spring:
   application:
     name: schedulling-financial-transfers
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+      fail-on-ignored-properties: true
+  resources:
+    add-mappings: false
 
 server:
   port: ${SERVER_PORT:8080}
+  error:
+    include-stacktrace: on_param
