@@ -11,12 +11,14 @@ import com.cvc.financial.domain.service.AccountService;
 import com.cvc.financial.domain.service.TransferService;
 import com.cvc.financial.domain.service.UserAccountService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("v1/users/{userId}/accounts/{accountId}/transfers")
@@ -28,15 +30,30 @@ public class UserAccountTransferController {
 
     @GetMapping
     public List<TransferOutput> findAllTransfersByUserIdAndAccountId(@PathVariable Long userId, @PathVariable Long accountId) {
+        log.info("Request for findAllTransfersByUserIdAndAccountId with userId {} userId {} and accountId {}",  userId, accountId);
+
         List<Transfer> transferList = transferService.findAllByUserIdAndAccountId(userId, accountId);
 
         return transferMapper.toDto(transferList);
+    }
+
+    @GetMapping("/{id}")
+    public TransferOutput findAllTransfersByUserIdAndAccountId(@PathVariable Long userId, @PathVariable Long accountId,
+                                                                     @PathVariable(name = "id") Long transferId) {
+        log.info("Request for findAllTransfersByUserIdAndAccountId with userId {} userId {}, accountId {} and transferId {}"
+                    ,userId, accountId, transferId);
+
+        Transfer transfer = transferService.findByIdAndUserIdAndAccountId(transferId, userId, accountId);
+
+        return transferMapper.toDto(transfer);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void saveTransfer(@PathVariable Long userId, @PathVariable Long accountId,
                              @Valid @RequestBody TransferInput transferInput) {
+        log.info("Request for saveTransfer with userId {} and accountId {}", userId, accountId);
+
         AccountInput accountInput = transferInput.getDestinationAccount();
 
         Account originatingAccount = userAccountService.findByIdAndUserID(accountId, userId);

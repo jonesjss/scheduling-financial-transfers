@@ -1,6 +1,7 @@
 package com.cvc.financial.domain.service;
 
 import com.cvc.financial.domain.exception.TransferException;
+import com.cvc.financial.domain.exception.TransferNotFoundException;
 import com.cvc.financial.domain.model.Transfer;
 import com.cvc.financial.domain.repository.TransferRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,12 @@ public class TransferService {
 
     public List<Transfer> findAllByUserIdAndAccountId(Long userId, Long accountId) {
         return transferRepository.findByUserIdAndAccountId(userId, accountId);
+    }
+
+    public Transfer findByIdAndUserIdAndAccountId(Long transferId, Long userId, Long accountId) {
+        return transferRepository.findByIdAndUserIdAndAccountId(transferId, userId, accountId)
+                .orElseThrow(() -> new TransferNotFoundException(
+                        String.format("Transfer not found with id %d, userId %d and accountId %d", transferId, userId, accountId)));
     }
 
     @Transactional
