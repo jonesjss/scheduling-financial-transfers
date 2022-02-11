@@ -18,18 +18,18 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "v1/users", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "v1/users")
 public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserOutput> findAll() {
         var users = userService.findAll();
         return userMapper.toDto(users);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public UserOutput findById(@PathVariable Long id) {
         try {
             User user = userService.findById(id);
@@ -40,7 +40,7 @@ public class UserController {
         }
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@Valid @RequestBody UserInput userInput) {
         User user = userMapper.toModel(userInput);
