@@ -1,6 +1,7 @@
 package com.cvc.financial.domain.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class TransferOver40DaysAndAmountOver100ThousandStrategy extends TransferStrategy {
 
@@ -25,7 +26,7 @@ public class TransferOver40DaysAndAmountOver100ThousandStrategy extends Transfer
         BigDecimal totalValue = new BigDecimal("0.02")
                 .multiply(transferValue.getTransferValue())
                 .add(transferValue.getTransferValue())
-                .setScale(2);
+                .setScale(2, RoundingMode.HALF_EVEN);
 
         return totalValue;
     }

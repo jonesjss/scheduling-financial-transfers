@@ -20,6 +20,7 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 @DisplayName("Tests for TransferService")
@@ -54,7 +55,7 @@ class TransferServiceTest {
                 .multiply(transfer.getTransferValue())
                 .add(transfer.getTransferValue())
                 .add(new BigDecimal("3.00"))
-                .setScale(2);
+                .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
@@ -78,7 +79,7 @@ class TransferServiceTest {
         BigDecimal totalValue = new BigDecimal("12")
                 .multiply(new BigDecimal(differenceInDays))
                 .add(transfer.getTransferValue())
-                .setScale(2);
+                .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
@@ -102,7 +103,7 @@ class TransferServiceTest {
         BigDecimal totalValue = new BigDecimal("0.08")
                 .multiply(transfer.getTransferValue())
                 .add(transfer.getTransferValue())
-                .setScale(2);
+                .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
@@ -126,7 +127,7 @@ class TransferServiceTest {
         BigDecimal totalValue = new BigDecimal("0.06")
                 .multiply(transfer.getTransferValue())
                 .add(transfer.getTransferValue())
-                .setScale(2);
+                .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
@@ -150,7 +151,7 @@ class TransferServiceTest {
         BigDecimal totalValue = new BigDecimal("0.04")
                 .multiply(transfer.getTransferValue())
                 .add(transfer.getTransferValue())
-                .setScale(2);
+                .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
@@ -176,7 +177,7 @@ class TransferServiceTest {
         BigDecimal totalValue = new BigDecimal("0.02")
                 .multiply(transfer.getTransferValue())
                 .add(transfer.getTransferValue())
-                .setScale(2);
+                .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
