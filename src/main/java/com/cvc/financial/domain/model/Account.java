@@ -10,7 +10,11 @@ import javax.persistence.*;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "accounts")
+@Table(name = "accounts",
+        uniqueConstraints = {
+            @UniqueConstraint(name = "uc_account_agency", columnNames = {"agency", "accountNumber"})
+        }
+)
 public class Account {
 
     @EqualsAndHashCode.Include
@@ -33,5 +37,9 @@ public class Account {
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

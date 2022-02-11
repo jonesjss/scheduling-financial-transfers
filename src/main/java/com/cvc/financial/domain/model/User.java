@@ -27,7 +27,7 @@ public class User {
 
     @CreationTimestamp
     @Column(nullable = false, columnDefinition = "datetime")
-    private OffsetDateTime creationDate;
+    private OffsetDateTime creation;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Account> accounts = new HashSet<>();
