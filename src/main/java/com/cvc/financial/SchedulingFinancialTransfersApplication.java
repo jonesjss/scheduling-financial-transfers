@@ -7,12 +7,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.util.TimeZone;
+
 @EntityScan(basePackageClasses = User.class)
 @EnableJpaRepositories(basePackageClasses = UserRepository.class)
 @SpringBootApplication
 public class SchedulingFinancialTransfersApplication {
 
 	public static void main(String[] args) {
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+
 		SpringApplication.run(SchedulingFinancialTransfersApplication.class, args);
 	}
 
