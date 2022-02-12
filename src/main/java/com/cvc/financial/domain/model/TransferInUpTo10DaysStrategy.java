@@ -1,8 +1,11 @@
 package com.cvc.financial.domain.model;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Slf4j
 public class TransferInUpTo10DaysStrategy extends TransferStrategy {
 
     public TransferInUpTo10DaysStrategy() {
@@ -22,6 +25,8 @@ public class TransferInUpTo10DaysStrategy extends TransferStrategy {
 
     @Override
     protected BigDecimal calculateTotalValue(TransferValue transferValue) {
+        log.info("Applied calculation is: 1 to 10 days.");
+
         long differenceInDays = getDifferenceDays(transferValue.getScheduling());
 
         BigDecimal totalValue = new BigDecimal("12")

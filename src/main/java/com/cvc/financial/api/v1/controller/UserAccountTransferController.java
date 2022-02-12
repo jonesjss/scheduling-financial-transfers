@@ -65,6 +65,8 @@ public class UserAccountTransferController implements UserAccountTransferControl
 
         transfer = transferService.save(transfer);
 
+        log.info("Transfer performed successfully.", userId, accountId);
+
         ResourceUriHelper.addLocationInUriResponseHeader(transfer.getId());
     }
 }

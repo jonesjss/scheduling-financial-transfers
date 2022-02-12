@@ -32,7 +32,7 @@ public class AccountFactory {
         var account =  Account.builder()
                                     .user(user)
                                     .agency("0002")
-                                    .accountNumber("987654")
+                                    .accountNumber("456841")
                                     .build();
         user.addAccount(account);
         return account;
