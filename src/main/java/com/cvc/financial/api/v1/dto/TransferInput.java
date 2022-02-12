@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class TransferInput {
-    @NotNull
+    @NotEmpty
     @Valid
     private AccountInput destinationAccount;
     @ApiModelProperty(example = "150000.00")
