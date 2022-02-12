@@ -1,6 +1,9 @@
 spring:
   application:
     name: schedulling-financial-transfers
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   jackson:
     deserialization:
       fail-on-unknown-properties: true

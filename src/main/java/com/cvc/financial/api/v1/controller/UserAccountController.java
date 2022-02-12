@@ -1,6 +1,7 @@
 package com.cvc.financial.api.v1.controller;
 
 import com.cvc.financial.api.ResourceUriHelper;
+import com.cvc.financial.api.openapi.controller.UserAccountControllerOpenApi;
 import com.cvc.financial.api.v1.dto.AccountInput;
 import com.cvc.financial.api.v1.dto.AccountOutput;
 import com.cvc.financial.api.v1.mapper.AccountMapper;
@@ -25,7 +26,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "v1/users/{userId}/accounts")
-public class UserAccountController {
+public class UserAccountController implements UserAccountControllerOpenApi {
     private final UserService userService;
     private final AccountService accountService;
     private final UserAccountService userAccountService;
@@ -47,16 +48,12 @@ public class UserAccountController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public void saveAccount(@PathVariable Long userId, @Valid @RequestBody AccountInput accountInput) {
-        try {
-            var user = userService.findById(userId);
-            Account account = accountMapper.toModel(accountInput);
-            account.setUser(user);
+        var user = userService.findById(userId);
+        Account account = accountMapper.toModel(accountInput);
+        account.setUser(user);
 
-            account = accountService.saveAccount(account);
+        account = accountService.saveAccount(account);
 
-            ResourceUriHelper.addLocationInUriResponseHeader(account.getId());
-        } catch (UserNotFoundException e) {
-            throw new BusinessException(e.getMessage());
-        }
+        ResourceUriHelper.addLocationInUriResponseHeader(account.getId());
     }
 }
