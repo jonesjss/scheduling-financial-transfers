@@ -4,8 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
@@ -23,7 +21,7 @@ import java.util.List;
 
 @Configuration
 @EnableSwagger2
-public class SpringFoxConfig implements WebMvcConfigurer {
+public class SpringFoxConfig {
 
     @Bean
     public Docket apiDocker() {
@@ -113,13 +111,5 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .version("1")
                 .contact(new Contact("CVCCorp", "https://www.cvc.com", "contact@cvc.com"))
                 .build();
-    }
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }
