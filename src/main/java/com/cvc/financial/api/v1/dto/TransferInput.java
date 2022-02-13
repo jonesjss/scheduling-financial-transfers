@@ -5,14 +5,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
 @Setter
 public class TransferInput {
-    @NotEmpty
+    @NotNull
     @Valid
     private AccountInput destinationAccount;
     @ApiModelProperty(example = "150000.00")

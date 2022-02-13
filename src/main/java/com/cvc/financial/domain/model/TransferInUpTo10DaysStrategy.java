@@ -24,16 +24,14 @@ public class TransferInUpTo10DaysStrategy extends TransferStrategy {
     }
 
     @Override
-    protected BigDecimal calculateTotalValue(TransferValue transferValue) {
+    protected BigDecimal calculateRate(TransferValue transferValue) {
         log.info("Applied calculation is: 1 to 10 days.");
 
         long differenceInDays = getDifferenceDays(transferValue.getScheduling());
 
-        BigDecimal totalValue = new BigDecimal("12")
-                .multiply(new BigDecimal(differenceInDays))
-                .add(transferValue.getTransferValue())
-                .setScale(2, RoundingMode.HALF_EVEN);
-
-        return totalValue;
+        BigDecimal rate =  new BigDecimal("12")
+                            .multiply(new BigDecimal(differenceInDays))
+                            .setScale(2, RoundingMode.HALF_EVEN);
+        return rate;
     }
 }

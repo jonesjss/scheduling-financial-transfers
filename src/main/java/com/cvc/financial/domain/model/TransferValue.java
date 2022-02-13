@@ -5,5 +5,6 @@ import java.time.LocalDate;
 
 public interface TransferValue {
     BigDecimal getTransferValue();
+    BigDecimal getRate();
     LocalDate getScheduling();
 }

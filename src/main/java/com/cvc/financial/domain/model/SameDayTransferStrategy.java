@@ -24,16 +24,14 @@ public class SameDayTransferStrategy extends TransferStrategy {
     }
 
     @Override
-    protected BigDecimal calculateTotalValue(TransferValue transferValue) {
+    protected BigDecimal calculateRate(TransferValue transferValue) {
         log.info("Applied calculation is: same day.");
 
         BigDecimal rate = new BigDecimal("0.03")
                 .multiply(transferValue.getTransferValue())
+                .add(new BigDecimal("3"))
                 .setScale(2, RoundingMode.HALF_EVEN);
 
-        return transferValue.getTransferValue()
-                .add(new BigDecimal("3"))
-                .add(rate)
-                .setScale(2, RoundingMode.HALF_EVEN);
+        return rate;
     }
 }

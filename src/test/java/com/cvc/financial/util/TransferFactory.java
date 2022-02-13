@@ -47,6 +47,7 @@ public class TransferFactory {
                 .scheduling(scheduling)
                 .transferType(TransferType.A)
                 .transferValue(new BigDecimal("100.00"))
+                .rate(new BigDecimal("6.00"))
                 .totalValue(new BigDecimal("106.00"))
                 .build();
     }

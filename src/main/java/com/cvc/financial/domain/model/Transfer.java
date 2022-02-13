@@ -34,22 +34,25 @@ public class Transfer implements TransferValue {
     @JoinColumn(name = "destination_account_id", updatable = false)
     private Account destinationAccount;
 
-    @CreationTimestamp
-    @Column(nullable = false, columnDefinition = "datetime")
-    private OffsetDateTime creation;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, updatable = false)
-    private TransferType transferType;
-
-    @Column(nullable = false)
-    private LocalDate scheduling;
-
     @Column(nullable = false, updatable = false)
     private BigDecimal transferValue;
 
     @Column(nullable = false, updatable = false)
+    private BigDecimal rate;
+
+    @Column(nullable = false)
+    private LocalDate scheduling;
+
+    @CreationTimestamp
+    @Column(nullable = false, columnDefinition = "datetime")
+    private OffsetDateTime creation;
+
+    @Column(nullable = false, updatable = false)
     private BigDecimal totalValue;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, updatable = false)
+    private TransferType transferType;
 
     public void setUser(User user) {
         this.user = user;
@@ -65,6 +68,10 @@ public class Transfer implements TransferValue {
 
     public void setTransferType(TransferType transferType) {
         this.transferType = transferType;
+    }
+
+    private void setRate(BigDecimal rate) {
+        this.rate = rate;
     }
 
     public void setScheduling(LocalDate scheduling) {
@@ -83,6 +90,7 @@ public class Transfer implements TransferValue {
         CalculatedTransfer calculatedTransfer = TransferCalculation.calculateRate(this);
 
         setTotalValue(calculatedTransfer.getCalculatedValue());
+        setRate(calculatedTransfer.getCalculatedRate());
         setTransferType(calculatedTransfer.getTransferType());
     }
 }

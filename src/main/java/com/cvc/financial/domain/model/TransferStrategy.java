@@ -4,6 +4,7 @@ import com.cvc.financial.domain.exception.TransferException;
 import lombok.Getter;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Objects;
@@ -26,10 +27,12 @@ public abstract class TransferStrategy {
 
     public CalculatedTransfer calculate(TransferValue transferValue) {
         if(isCalculate(transferValue)) {
-            BigDecimal totalValue = calculateTotalValue(transferValue);
+            BigDecimal rate = calculateRate(transferValue);
+            BigDecimal totalValue = calculateTotalValue(transferValue, rate);
 
             CalculatedTransfer calculatedTransfer = CalculatedTransfer.builder()
                     .calculatedValue(totalValue)
+                    .calculatedRate(rate)
                     .transferType(getTransferType())
                     .build();
 
@@ -46,5 +49,12 @@ public abstract class TransferStrategy {
 
     protected abstract boolean isCalculate(TransferValue transferValue);
 
-    protected abstract BigDecimal calculateTotalValue(TransferValue transferValue);
+    protected BigDecimal calculateTotalValue(TransferValue transferValue, BigDecimal rate) {
+        BigDecimal totalValue = rate.add(transferValue.getTransferValue())
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        return totalValue;
+    }
+
+    protected abstract BigDecimal calculateRate(TransferValue transferValue);
 }

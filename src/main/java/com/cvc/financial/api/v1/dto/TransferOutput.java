@@ -27,6 +27,8 @@ public class TransferOutput {
     private LocalDate scheduling;
     @ApiModelProperty(example = "150000")
     private BigDecimal transferValue;
+    @ApiModelProperty(example = "3000")
+    private BigDecimal rate;
     @ApiModelProperty(example = "153000")
     private BigDecimal totalValue;
 }

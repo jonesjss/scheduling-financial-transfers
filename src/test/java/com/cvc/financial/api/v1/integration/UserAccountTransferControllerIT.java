@@ -81,10 +81,12 @@ class UserAccountTransferControllerIT {
         response.then().statusCode(HttpStatus.CREATED.value());
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("0.03")
+        BigDecimal rate = new BigDecimal("0.03")
                 .multiply(transfer.getTransferValue())
-                .add(transfer.getTransferValue())
                 .add(new BigDecimal("3.00"))
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         given()
@@ -94,7 +96,7 @@ class UserAccountTransferControllerIT {
                 .get(response.header("Location"))
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body(
+                .body("rate", is(rate),
                         "totalValue", is(totalValue),
                         "transferType", equalTo(TransferType.A.toString())
                 );
@@ -119,9 +121,11 @@ class UserAccountTransferControllerIT {
         response.then().statusCode(HttpStatus.CREATED.value());
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("12")
+        BigDecimal rate = new BigDecimal("12")
                 .multiply(new BigDecimal(differenceInDays))
-                .add(transfer.getTransferValue())
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         given()
@@ -131,7 +135,7 @@ class UserAccountTransferControllerIT {
                 .get(response.header("Location"))
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body(
+                .body("rate", is(rate),
                         "totalValue", is(totalValue),
                         "transferType", equalTo(TransferType.B.toString())
                 );
@@ -156,9 +160,11 @@ class UserAccountTransferControllerIT {
         response.then().statusCode(HttpStatus.CREATED.value());
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("0.08")
+        BigDecimal rate = new BigDecimal("0.08")
                 .multiply(transfer.getTransferValue())
-                .add(transfer.getTransferValue())
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         given()
@@ -168,7 +174,7 @@ class UserAccountTransferControllerIT {
                 .get(response.header("Location"))
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body(
+                .body("rate", is(rate),
                         "totalValue", is(totalValue),
                         "transferType", equalTo(TransferType.C.toString())
                 );
@@ -193,9 +199,11 @@ class UserAccountTransferControllerIT {
         response.then().statusCode(HttpStatus.CREATED.value());
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("0.06")
+        BigDecimal rate = new BigDecimal("0.06")
                 .multiply(transfer.getTransferValue())
-                .add(transfer.getTransferValue())
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         given()
@@ -205,7 +213,7 @@ class UserAccountTransferControllerIT {
                 .get(response.header("Location"))
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body(
+                .body("rate", is(rate),
                         "totalValue", is(totalValue),
                         "transferType", equalTo(TransferType.C.toString())
                 );
@@ -230,9 +238,11 @@ class UserAccountTransferControllerIT {
         response.then().statusCode(HttpStatus.CREATED.value());
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("0.04")
+        BigDecimal rate = new BigDecimal("0.04")
                 .multiply(transfer.getTransferValue())
-                .add(transfer.getTransferValue())
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         given()
@@ -242,7 +252,7 @@ class UserAccountTransferControllerIT {
                 .get(response.header("Location"))
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body(
+                .body("rate", is(rate),
                         "totalValue", is(totalValue),
                         "transferType", equalTo(TransferType.C.toString())
                 );
@@ -268,9 +278,11 @@ class UserAccountTransferControllerIT {
         response.then().statusCode(HttpStatus.CREATED.value());
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("0.02")
+        BigDecimal rate = new BigDecimal("0.02")
                 .multiply(transfer.getTransferValue())
-                .add(transfer.getTransferValue())
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         given()
@@ -280,7 +292,7 @@ class UserAccountTransferControllerIT {
                 .get(response.header("Location"))
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body(
+                .body("rate", is(rate),
                         "totalValue", is(totalValue),
                         "transferType", equalTo(TransferType.C.toString())
                 );

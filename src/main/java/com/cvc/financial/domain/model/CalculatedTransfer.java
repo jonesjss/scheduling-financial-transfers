@@ -11,5 +11,6 @@ import java.math.BigDecimal;
 @Getter
 public class CalculatedTransfer {
     private TransferType transferType;
+    private BigDecimal calculatedRate;
     private BigDecimal calculatedValue;
 }

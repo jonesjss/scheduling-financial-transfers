@@ -25,12 +25,11 @@ public class TransferOver40DaysAndAmountOver100ThousandStrategy extends Transfer
     }
 
     @Override
-    protected BigDecimal calculateTotalValue(TransferValue transferValue) {
+    protected BigDecimal calculateRate(TransferValue transferValue) {
         log.info("Applied calculation is 40 days and amount over 100 thousand.");
 
         BigDecimal totalValue = new BigDecimal("0.02")
                 .multiply(transferValue.getTransferValue())
-                .add(transferValue.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         return totalValue;

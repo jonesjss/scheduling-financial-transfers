@@ -30,7 +30,7 @@ public class UserAccountTransferController implements UserAccountTransferControl
     private final TransferService transferService;
     private final TransferMapper transferMapper;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<TransferOutput> findAllTransfersByUserIdAndAccountId(@PathVariable Long userId, @PathVariable Long accountId) {
         log.info("Request for findAllTransfersByUserIdAndAccountId with userId {} userId {} and accountId {}",  userId, accountId);
 

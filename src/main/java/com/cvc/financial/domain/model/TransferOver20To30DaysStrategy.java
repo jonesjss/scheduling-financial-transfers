@@ -24,14 +24,13 @@ public class TransferOver20To30DaysStrategy extends TransferStrategy {
     }
 
     @Override
-    protected BigDecimal calculateTotalValue(TransferValue transferValue) {
+    protected BigDecimal calculateRate(TransferValue transferValue) {
         log.info("Applied calculation is: 21 to 30 days.");
 
-        BigDecimal totalValue = new BigDecimal("0.06")
+        BigDecimal rate = new BigDecimal("0.06")
                 .multiply(transferValue.getTransferValue())
-                .add(transferValue.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
-        return totalValue;
+        return rate;
     }
 }

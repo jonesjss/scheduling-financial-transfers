@@ -51,16 +51,19 @@ class TransferServiceTest {
                 .thenReturn(transfer);
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("0.03")
+        BigDecimal rate = new BigDecimal("0.03")
                 .multiply(transfer.getTransferValue())
-                .add(transfer.getTransferValue())
                 .add(new BigDecimal("3.00"))
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
         Assertions.assertThat(transferSaved).isNotNull();
         Assertions.assertThat(transferSaved.getTransferType()).isEqualTo(TransferType.A);
+        Assertions.assertThat(transferSaved.getRate()).isEqualTo(rate);
         Assertions.assertThat(transferSaved.getTotalValue()).isEqualTo(totalValue);
     }
 
@@ -76,15 +79,18 @@ class TransferServiceTest {
                 .thenReturn(transfer);
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("12")
+        BigDecimal rate = new BigDecimal("12")
                 .multiply(new BigDecimal(differenceInDays))
-                .add(transfer.getTransferValue())
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
         Assertions.assertThat(transferSaved).isNotNull();
         Assertions.assertThat(transferSaved.getTransferType()).isEqualTo(TransferType.B);
+        Assertions.assertThat(transferSaved.getRate()).isEqualTo(rate);
         Assertions.assertThat(transferSaved.getTotalValue()).isEqualTo(totalValue);
     }
 
@@ -100,15 +106,18 @@ class TransferServiceTest {
                 .thenReturn(transfer);
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("0.08")
+        BigDecimal rate = new BigDecimal("0.08")
                 .multiply(transfer.getTransferValue())
-                .add(transfer.getTransferValue())
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
         Assertions.assertThat(transferSaved).isNotNull();
         Assertions.assertThat(transferSaved.getTransferType()).isEqualTo(TransferType.C);
+        Assertions.assertThat(transferSaved.getRate()).isEqualTo(rate);
         Assertions.assertThat(transferSaved.getTotalValue()).isEqualTo(totalValue);
     }
 
@@ -124,15 +133,18 @@ class TransferServiceTest {
                 .thenReturn(transfer);
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("0.06")
+        BigDecimal rate = new BigDecimal("0.06")
                 .multiply(transfer.getTransferValue())
-                .add(transfer.getTransferValue())
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
         Assertions.assertThat(transferSaved).isNotNull();
         Assertions.assertThat(transferSaved.getTransferType()).isEqualTo(TransferType.C);
+        Assertions.assertThat(transferSaved.getRate()).isEqualTo(rate);
         Assertions.assertThat(transferSaved.getTotalValue()).isEqualTo(totalValue);
     }
 
@@ -148,15 +160,18 @@ class TransferServiceTest {
                 .thenReturn(transfer);
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("0.04")
+        BigDecimal rate = new BigDecimal("0.04")
                 .multiply(transfer.getTransferValue())
-                .add(transfer.getTransferValue())
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
         Assertions.assertThat(transferSaved).isNotNull();
         Assertions.assertThat(transferSaved.getTransferType()).isEqualTo(TransferType.C);
+        Assertions.assertThat(transferSaved.getRate()).isEqualTo(rate);
         Assertions.assertThat(transferSaved.getTotalValue()).isEqualTo(totalValue);
     }
 
@@ -174,15 +189,18 @@ class TransferServiceTest {
                 .thenReturn(transfer);
 
         // rate calculation formula
-        BigDecimal totalValue = new BigDecimal("0.02")
+        BigDecimal rate = new BigDecimal("0.02")
                 .multiply(transfer.getTransferValue())
-                .add(transfer.getTransferValue())
+                .setScale(2, RoundingMode.HALF_EVEN);
+
+        BigDecimal totalValue = rate.add(transfer.getTransferValue())
                 .setScale(2, RoundingMode.HALF_EVEN);
 
         Transfer transferSaved = transferService.save(transfer);
 
         Assertions.assertThat(transferSaved).isNotNull();
         Assertions.assertThat(transferSaved.getTransferType()).isEqualTo(TransferType.C);
+        Assertions.assertThat(transferSaved.getRate()).isEqualTo(rate);
         Assertions.assertThat(transferSaved.getTotalValue()).isEqualTo(totalValue);
     }
 
