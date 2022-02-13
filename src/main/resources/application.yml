@@ -1,9 +1,20 @@
 spring:
   application:
     name: schedulling-financial-transfers
+  datasource:
+    url: jdbc:h2:mem:${DB_DATABASE:default}
+    driver-class-name: org.h2.Driver
+    username: ${DB_USER:sa}
+    password: ${DB_PASS:}
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
   jackson:
     deserialization:
       fail-on-unknown-properties: true
