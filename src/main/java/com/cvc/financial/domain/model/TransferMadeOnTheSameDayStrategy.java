@@ -6,13 +6,13 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @Slf4j
-public class SameDayTransferStrategy extends TransferStrategy {
+public class TransferMadeOnTheSameDayStrategy extends TransferStrategy {
 
-    public SameDayTransferStrategy() {
+    public TransferMadeOnTheSameDayStrategy() {
         this(null);
     }
 
-    public SameDayTransferStrategy(TransferStrategy transferStrategy) {
+    public TransferMadeOnTheSameDayStrategy(TransferStrategy transferStrategy) {
         super(TransferType.A, transferStrategy);
     }
 

@@ -8,8 +8,8 @@ public class TransferCalculation {
         TransferStrategy transferOver20To30DaysStrategy = new TransferOver20To30DaysStrategy(transferOver30To40DaysStrategy);
         TransferStrategy transferOver10To20DaysStrategy = new TransferOver10To20DaysStrategy(transferOver20To30DaysStrategy);
         TransferStrategy transferInUpTo10DaysStrategy = new TransferInUpTo10DaysStrategy(transferOver10To20DaysStrategy);
-        TransferStrategy sameDayTransferStrategy = new SameDayTransferStrategy(transferInUpTo10DaysStrategy);
+        TransferStrategy transferMadeOnTheSameDayStrategy = new TransferMadeOnTheSameDayStrategy(transferInUpTo10DaysStrategy);
 
-        return sameDayTransferStrategy.calculate(transferValue);
+        return transferMadeOnTheSameDayStrategy.calculate(transferValue);
     }
 }
